@@ -4,10 +4,49 @@ Projeto acadêmico desenvolvido para avaliar e comparar o desempenho de quatro t
 
 ---
 
+# Descoberta Importante: Tamanho das Respostas gRPC
+
+Durante a análise dos resultados dos testes de carga, foi identificado que a ferramenta utilizada registrava o campo **Average Content Size** das requisições gRPC como **0 bytes**.
+
+Esse resultado não significa que as respostas gRPC não possuíam conteúdo. O valor aparecia como zero porque o cliente de teste utilizado para integrar o gRPC não informava automaticamente à ferramenta o tamanho da resposta recebida.
+
+Diferentemente de REST, GraphQL e SOAP, que normalmente transportam dados textuais em formatos como **JSON** e **XML**, o gRPC utiliza mensagens binárias serializadas com **Protocol Buffers**, transportadas em frames do protocolo **HTTP/2**. Por esse motivo, o tamanho da resposta não foi capturado automaticamente no relatório padrão da ferramenta.
+
+## Como o tamanho foi descoberto
+
+Para descobrir o tamanho real das respostas, foi calculado diretamente no servidor o comprimento do array de bytes produzido após a serialização da mensagem com Protobuf.
+
+Em outras palavras, após criar a resposta gRPC, a mensagem foi serializada e seu tamanho foi obtido por meio do seu comprimento em bytes:
+
+```text
+Tamanho da resposta = length(mensagem serializada pelo Protobuf)
+```
+
+Esse procedimento permitiu descobrir o peso real dos payloads enviados pelo servidor, mesmo que a ferramenta de teste apresentasse o valor como zero.
+
+## Resultados encontrados
+
+| Operação gRPC         | 100 usuários | 250 usuários | 500 usuários | Tamanho aproximado |
+| --------------------- | -----------: | -----------: | -----------: | -----------------: |
+| `ListUsers`           | 24.777 bytes | 24.777 bytes | 24.777 bytes |              24 KB |
+| `ListSongs`           | 21.154 bytes | 21.154 bytes | 21.154 bytes |              21 KB |
+| `ListPlaylistsByUser` |    303 bytes |    303 bytes |    303 bytes |             0,3 KB |
+
+### Interpretação dos resultados
+
+* A operação `ListUsers` retornou uma mensagem serializada de **24.777 bytes**, aproximadamente **24 KB**.
+* A operação `ListSongs` retornou uma mensagem serializada de **21.154 bytes**, aproximadamente **21 KB**.
+* A operação `ListPlaylistsByUser`, consultando as playlists de apenas um usuário, retornou somente **303 bytes**.
+
+Portanto, o valor **0 bytes** exibido no relatório deve ser interpretado como uma limitação da instrumentação do teste, e não como ausência de dados na resposta gRPC.
+
+---
+
 ## 1. Identificação da Equipe
-- **Alanis Aguiar Bitencourt - 2315059**
-- **Livia Catarina Modesto Macedo - 2315085**
-- **Gabriel Costa Castro - 2314515**
+
+* **Alanis Aguiar Bitencourt - 2315059**
+* **Livia Catarina Modesto Macedo - 2315085**
+* **Gabriel Costa Castro - 2314515**
 
 ---
 
