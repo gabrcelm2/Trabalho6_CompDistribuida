@@ -1,0 +1,4 @@
+Method,Name,Error,Occurrences
+POST,SOAP_GetSongsByPlaylist,HTTPError('500 Server Error:  for url: SOAP_GetSongsByPlaylist'),4969
+POST,SOAP_GetPlaylistsBySong,HTTPError('500 Server Error:  for url: SOAP_GetPlaylistsBySong'),4684
+POST,SOAP_GetPlaylistsByUser,HTTPError('500 Server Error:  for url: SOAP_GetPlaylistsByUser'),920

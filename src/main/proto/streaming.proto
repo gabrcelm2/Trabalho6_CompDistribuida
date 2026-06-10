@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package streaming;
+
+option java_package = "br.unifor.streaming_musicas.grpc";
+option java_outer_classname = "StreamingProto";
+option java_multiple_files = true;
+
+// Entidades
+message User {
+    int64 id = 1;
+    string nome = 2;
+    int32 idade = 3;
+}
+
+message Song {
+    int64 id = 1;
+    string nome = 2;
+    string artista = 3;
+}
+
+message Playlist {
+    int64 id = 1;
+    string nome = 2;
+    int64 usuario_id = 3;
+    repeated Song songs = 4;
+}
+
+// Respostas
+message UserList {
+    repeated User users = 1;
+}
+
+message SongList {
+    repeated Song songs = 1;
+}
+
+message PlaylistList {
+    repeated Playlist playlists = 1;
+}
+
+message Empty {}
+
+// Request específicos
+message IdRequest {
+    int64 id = 1;
+}
+
+// Serviços
+service StreamingService {
+    rpc ListUsers (Empty) returns (UserList);
+    rpc ListSongs (Empty) returns (SongList);
+    rpc ListPlaylistsByUser (IdRequest) returns (PlaylistList);
+    rpc ListSongsByPlaylist (IdRequest) returns (SongList);
+    rpc ListPlaylistsBySong (IdRequest) returns (PlaylistList);
+}

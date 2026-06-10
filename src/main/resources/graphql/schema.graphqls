@@ -1,0 +1,25 @@
+type Query {
+    allUsers: [User]
+    allSongs: [Song]
+    playlistsByUser(userId: ID!): [Playlist]
+    songsByPlaylist(playlistId: ID!): [Song]
+    playlistsBySong(songId: ID!): [Playlist]
+}
+
+type User {
+    id: ID!
+    nome: String
+    idade: Int
+}
+
+type Song {
+    id: ID!
+    nome: String
+    artista: String
+}
+
+type Playlist {
+    id: ID!
+    nome: String
+    songs: [Song]
+}

@@ -1,0 +1,6 @@
+Method,Name,Error,Occurrences
+POST,SOAP_GetPlaylistsBySong,"ConnectionRefusedError(10061, '[WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.')",158
+POST,SOAP_GetSongs,"ConnectionRefusedError(10061, '[WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.')",167
+POST,SOAP_GetPlaylistsByUser,"ConnectionRefusedError(10061, '[WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.')",165
+POST,SOAP_GetSongsByPlaylist,"ConnectionRefusedError(10061, '[WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.')",195
+POST,SOAP_GetUsers,"ConnectionRefusedError(10061, '[WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente.')",178

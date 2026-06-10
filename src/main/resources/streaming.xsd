@@ -1,0 +1,98 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://streaming.unifor.br/soap"
+           xmlns:tns="http://streaming.unifor.br/soap"
+           elementFormDefault="qualified">
+
+    <xs:complexType name="UserSoap">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="idade" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SongSoap">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="artista" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PlaylistSoap">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="usuarioId" type="xs:long"/>
+            <xs:element name="songs" type="tns:SongSoap" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Requests e Responses -->
+    <xs:element name="GetUsersRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="GetUsersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="users" type="tns:UserSoap" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetSongsRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="GetSongsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="songs" type="tns:SongSoap" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetPlaylistsByUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPlaylistsByUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="playlists" type="tns:PlaylistSoap" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetSongsByPlaylistRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="playlistId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSongsByPlaylistResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="songs" type="tns:SongSoap" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetPlaylistsBySongRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="songId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPlaylistsBySongResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="playlists" type="tns:PlaylistSoap" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

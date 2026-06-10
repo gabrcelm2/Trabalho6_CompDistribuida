@@ -1,0 +1,129 @@
+{
+	"info": {
+		"name": "Streaming Musicas API",
+		"description": "Coleção Postman para CRUD completo do serviço de streaming de músicas.\nJava: http://localhost:8080\nPython: http://localhost:8000",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{ "key": "base_url", "value": "http://localhost:8080", "type": "string" }
+	],
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Listar todos os usuarios",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/usuarios" } }
+				},
+				{
+					"name": "Buscar usuario por ID",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/usuarios/1" } }
+				},
+				{
+					"name": "Criar usuario",
+					"request": {
+						"method": "POST",
+						"url": { "raw": "{{base_url}}/api/usuarios" },
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": { "mode": "raw", "raw": "{\n  \"nome\": \"João Silva\",\n  \"idade\": 25\n}" }
+					}
+				},
+				{
+					"name": "Atualizar usuario",
+					"request": {
+						"method": "PUT",
+						"url": { "raw": "{{base_url}}/api/usuarios/1" },
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": { "mode": "raw", "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"idade\": 30\n}" }
+					}
+				},
+				{
+					"name": "Deletar usuario",
+					"request": { "method": "DELETE", "url": { "raw": "{{base_url}}/api/usuarios/1001" } }
+				},
+				{
+					"name": "Listar playlists do usuario",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/usuarios/1/playlists" } }
+				}
+			]
+		},
+		{
+			"name": "Musicas",
+			"item": [
+				{
+					"name": "Listar todas as musicas",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/musicas" } }
+				},
+				{
+					"name": "Buscar musica por ID",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/musicas/1" } }
+				},
+				{
+					"name": "Criar musica",
+					"request": {
+						"method": "POST",
+						"url": { "raw": "{{base_url}}/api/musicas" },
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": { "mode": "raw", "raw": "{\n  \"nome\": \"Garota de Ipanema\",\n  \"artista\": \"Tom Jobim\"\n}" }
+					}
+				},
+				{
+					"name": "Atualizar musica",
+					"request": {
+						"method": "PUT",
+						"url": { "raw": "{{base_url}}/api/musicas/1" },
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": { "mode": "raw", "raw": "{\n  \"nome\": \"Garota de Ipanema (Remix)\",\n  \"artista\": \"Tom Jobim\"\n}" }
+					}
+				},
+				{
+					"name": "Deletar musica",
+					"request": { "method": "DELETE", "url": { "raw": "{{base_url}}/api/musicas/501" } }
+				},
+				{
+					"name": "Listar playlists da musica",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/musicas/1/playlists" } }
+				}
+			]
+		},
+		{
+			"name": "Playlists",
+			"item": [
+				{
+					"name": "Listar todas as playlists",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/playlists" } }
+				},
+				{
+					"name": "Buscar playlist por ID",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/playlists/1" } }
+				},
+				{
+					"name": "Criar playlist",
+					"request": {
+						"method": "POST",
+						"url": { "raw": "{{base_url}}/api/playlists" },
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": { "mode": "raw", "raw": "{\n  \"nome\": \"Minha Nova Playlist\"\n}" }
+					}
+				},
+				{
+					"name": "Atualizar playlist",
+					"request": {
+						"method": "PUT",
+						"url": { "raw": "{{base_url}}/api/playlists/1" },
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": { "mode": "raw", "raw": "{\n  \"nome\": \"Playlist Atualizada\"\n}" }
+					}
+				},
+				{
+					"name": "Deletar playlist",
+					"request": { "method": "DELETE", "url": { "raw": "{{base_url}}/api/playlists/201" } }
+				},
+				{
+					"name": "Listar musicas da playlist",
+					"request": { "method": "GET", "url": { "raw": "{{base_url}}/api/playlists/1/musicas" } }
+				}
+			]
+		}
+	]
+}

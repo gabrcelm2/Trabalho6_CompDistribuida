@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+strawberry-graphql
+spyne
+lxml
+grpcio
+grpcio-tools
+locust
+matplotlib
